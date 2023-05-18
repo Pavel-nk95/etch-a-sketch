@@ -1,0 +1,20 @@
+{
+  "name": "etch-a-sketch",
+  "version": "0.1.0",
+  "description": "odin training project",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hexlet-boilerplates/html-boilerplate.git"
+  },
+  "main": "",
+  "devDependencies": {
+    "htmlhint": "^1.1.0",
+    "stylelint": "^14.2.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^24.0.0",
+    "stylelint-order": "^5.0.0",
+    "surge": "^0.23.1"
+  },
+  "author": "Pavel Nikonorov",
+  "license": "ISC"
+}

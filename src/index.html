@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Etch-a-sketch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./svg/pen.svg" sizes="any" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles/normalize.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1 class="header__title title">Etch-a-sketch</h1>
+      <p class="header__desc"></p>
+    </div>
+    <section class="grid">
+      <div class="wrapper">
+        <div class="field"></div>
+        <div class="controls">
+          <button class="btn btn--color"></button>
+          <button class="btn">Black mode</button>
+          <button class="btn">Rainbow mode</button>
+          <button class="btn">Eraser</button>
+          <button class="btn">Clear</button>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="wrapper">
+        <a href="http://">Github</a>
+        <p>Built by Pavel-nk. 2023</p>
+      </div>
+    </footer>
+
+    <div class="modal visually-hidden">
+      <h2 class="modal__title">Choose the grid size</h2>
+      <div class="range-box">
+        <input type="range" value="24" min="1" max="60" id="range" />
+        <button class="close">Close</button>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
