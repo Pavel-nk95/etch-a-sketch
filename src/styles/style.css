@@ -136,16 +136,28 @@ button {
   color: var(--text-orange-color);
 }
 
-.btn--color {
-  width: 128px;
-  height: 128px;
-  background: #f97b22;
+.select-color-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
 }
 
-.btn--color:hover,
-.btn--color:active {
+.select-color-label {
+  font-size: 18px;
+  margin-bottom: 1rem;
+}
+
+.select-color {
+  width: 128px;
+  height: 128px;
+  border: none;
+  outline: none;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.select-color:hover,
+.select-color:active {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
-  color: var(--text-color);
 }
 
 .range-box {

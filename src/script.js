@@ -1,13 +1,22 @@
 "use strict";
 
 const grid = document.querySelector('.grid');
-const toggleGridLinesBtn = document.querySelector('.btn-toggle-grid-lines');
-const clearBtn = document.querySelector('.btn-clear');
+const toggleGridLinesBtn = document.querySelector('#btn-toggle-grid-lines');
+const blackBtn = document.querySelector('#btn-black');
+const eraserBtn = document.querySelector('#btn-eraser');
+const clearBtn = document.querySelector('#btn-clear');
+const selectColorBtn = document.querySelector('#select-color');
+
+const colors = {
+  black: '#000000',
+  white: '#ffffff'
+};
 
 const uiState = {
   activeBrush: false,
   count: 16,
   gridSize: 640,
+  colorBrush: colors.black,
 };
 
 const getRandomColor = () => {
@@ -33,7 +42,7 @@ const renderGrid = (count) => {
 };
 
 const startApp = () => {
-  renderGrid(count);
+  renderGrid(uiState.count);
   const allCells = document.querySelectorAll('.cell');
   toggleGridLinesBtn.addEventListener('click', () => {
     allCells.forEach((cell) => {
@@ -43,13 +52,26 @@ const startApp = () => {
 
   clearBtn.addEventListener('click', () => {
     allCells.forEach((cell) => {
-      cell.style.backgroundColor = "#ffffff";
+      cell.style.backgroundColor = colors.white;
     });
+  });
+
+  eraserBtn.addEventListener('click', () => {
+    uiState.colorBrush = colors.white;
+  });
+
+  blackBtn.addEventListener('click', () => {
+    uiState.colorBrush = colors.black;
+  });
+
+  selectColorBtn.addEventListener('change', ({ target }) => {
+      const { value } = target;
+      uiState.colorBrush = value;
   });
 
   const listener = ({target}) => {
     if (target.classList.contains('cell')) {
-      target.style.backgroundColor = "#000000";
+      target.style.backgroundColor = uiState.colorBrush;
     }
   };
 
