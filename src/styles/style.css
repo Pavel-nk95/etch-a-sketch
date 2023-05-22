@@ -5,6 +5,8 @@
   --bg-grid-color: #ffffff;
   --bg-darken-color: #7c9070;
   --text-orange-color: #f97b22;
+  --black-color: #000000;
+  --cell: 16px;
 }
 
 * {
@@ -97,12 +99,14 @@ button {
 
 .grid {
   background: var(--bg-grid-color);
-  width: 640px;
-  height: 640px;
+  width: 644px;
+  height: 644px;
   border: 2px solid var(--bg-darken-color);
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
   flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .controls {
@@ -187,6 +191,17 @@ button {
   width: 24px;
   height: 24px;
   background: url("../svg/github.svg") no-repeat;
+}
+
+.cell {
+  width: var(--cell);
+  height: var(--cell);
+  box-sizing: border-box;
+}
+
+.border-active {
+  border-left: 1px solid var(--text-color);
+  border-bottom: 1px solid var(--text-color);
 }
 
 @media screen and (max-width: 1400px) {
