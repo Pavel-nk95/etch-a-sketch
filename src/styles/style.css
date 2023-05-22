@@ -206,9 +206,8 @@ button {
 }
 
 .cell {
-  width: var(--cell);
-  height: var(--cell);
   box-sizing: border-box;
+  flex: 1 1 var(--cell);
 }
 
 .border-active {
