@@ -9,6 +9,7 @@ const selectColorBtn = document.querySelector('#select-color');
 const rainbowBtn = document.querySelector('#btn-rainbow');
 const grayScaleBtn = document.querySelector('#btn-gray-scale');
 const range = document.querySelector('#range');
+const currentRange = document.querySelector('.current-range');
 
 const colors = {
   black: '#000000',
@@ -47,6 +48,7 @@ const createCell = () => {
 
 const renderGrid = (count) => {
   grid.replaceChildren();
+  currentRange.textContent = `Grid size: ${uiState.count} x ${uiState.count}`;
   const { gridSize } = uiState;
   const cellSize = Math.floor(gridSize / count);
   document.documentElement.style.setProperty("--cell", cellSize + "px");
@@ -58,7 +60,6 @@ const renderGrid = (count) => {
 
 const startApp = () => {
   renderGrid(uiState.count);
-  range.setAttribute("value", "8");
 
   toggleGridLinesBtn.addEventListener('click', () => {
     const allNewCells = document.querySelectorAll('.cell');
@@ -102,11 +103,14 @@ const startApp = () => {
 
   range.addEventListener('change', ({ target }) => {
     const { value } = target;
-    renderGrid(+value);
+    uiState.count = value;
+    const { count } = uiState;
+    renderGrid(count);
   });
 
   selectColorBtn.addEventListener('change', ({ target }) => {
       uiState.rainbowMode = false;
+      uiState.grayScaleMode = false;
       const { value } = target;
       uiState.colorBrush = value;
   });

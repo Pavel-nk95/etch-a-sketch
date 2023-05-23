@@ -99,9 +99,8 @@ button {
 
 .grid {
   background: var(--bg-grid-color);
-  width: 644px;
-  height: 644px;
-  border: 2px solid var(--bg-darken-color);
+  width: 640px;
+  height: 640px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 0px;
   flex-shrink: 0;
@@ -208,6 +207,7 @@ button {
 .cell {
   box-sizing: border-box;
   flex: 1 1 var(--cell);
+  height: var(--cell);
   background-color: #ffffff;
 }
 
