@@ -7,6 +7,7 @@ const eraserBtn = document.querySelector('#btn-eraser');
 const clearBtn = document.querySelector('#btn-clear');
 const selectColorBtn = document.querySelector('#select-color');
 const rainbowBtn = document.querySelector('#btn-rainbow');
+const grayScaleBtn = document.querySelector('#btn-gray-scale');
 const range = document.querySelector('#range');
 
 const colors = {
@@ -16,11 +17,22 @@ const colors = {
 
 const uiState = {
   rainbowMode: false,
+  grayScaleMode: false,
   activeBrush: false,
   count: 16,
   gridSize: 640,
   colorBrush: colors.black,
 };
+
+const getNewGrayScaleColor = (rgbColor) => {
+  let sep = rgbColor.indexOf(",") > -1 ? "," : " ";
+  const [r, g, b] = rgbColor.substr(4).split(")")[0].split(sep);
+  console.log(r, g ,b)
+  if ((+r - 25) <= 0 || (+g - 25) <= 0 || (+b - 25) <= 0) {
+    return rgbColor;
+  }
+  return `rgb(${(+r - 25)}, ${(+g - 25)}, ${(+b - 25)})`;
+}
 
 const getRandomColor = () => {
   return '#' + (Math.random().toString(16) + '000000').substring(2,8).toUpperCase();
@@ -47,7 +59,7 @@ const renderGrid = (count) => {
 
 const startApp = () => {
   renderGrid(uiState.count);
-  const allCells = document.querySelectorAll('.cell');
+  range.setAttribute("value", "8");
 
   toggleGridLinesBtn.addEventListener('click', () => {
     const allNewCells = document.querySelectorAll('.cell');
@@ -57,7 +69,9 @@ const startApp = () => {
   });
 
   clearBtn.addEventListener('click', () => {
+    const allNewCells = document.querySelectorAll('.cell');
     uiState.rainbowMode = false;
+    uiState.grayScaleMode = false;
     allCells.forEach((cell) => {
       cell.style.backgroundColor = colors.white;
     });
@@ -65,22 +79,30 @@ const startApp = () => {
 
   eraserBtn.addEventListener('click', () => {
     uiState.rainbowMode = false;
+    uiState.grayScaleMode = false;
     uiState.colorBrush = colors.white;
+  });
+
+  grayScaleBtn.addEventListener('click', () => {
+    uiState.rainbowMode = false;
+    const { grayScaleMode } = uiState;
+    uiState.grayScaleMode = !grayScaleMode;
   });
 
   blackBtn.addEventListener('click', () => {
     uiState.rainbowMode = false;
+    uiState.grayScaleMode = false;
     uiState.colorBrush = colors.black;
   });
 
   rainbowBtn.addEventListener('click', () => {
+    uiState.grayScaleMode = false;
     const { rainbowMode } = uiState;
     uiState.rainbowMode = !rainbowMode;
   });
 
   range.addEventListener('change', ({ target }) => {
     const { value } = target;
-    console.log(+value);
     renderGrid(+value);
   });
 
@@ -91,9 +113,19 @@ const startApp = () => {
   });
 
   const listener = ({target}) => {
-    const { rainbowMode } = uiState;
+    const { rainbowMode, grayScaleMode } = uiState;
     if (target.classList.contains('cell')) {
-      target.style.backgroundColor = rainbowMode ? getRandomColor() : uiState.colorBrush;
+      if (rainbowMode) {
+        target.style.filter = 'none';
+        target.style.backgroundColor = getRandomColor();
+      } else if (grayScaleMode) {
+        const currentColor = getComputedStyle(target).backgroundColor;
+        const newGrayScaleColor = getNewGrayScaleColor(currentColor);
+        target.style.backgroundColor = newGrayScaleColor;
+      } else {
+        target.style.filter = 'none';
+        target.style.backgroundColor = uiState.colorBrush;
+      }
     }
   };
 
@@ -110,10 +142,3 @@ const startApp = () => {
 };
 
 startApp();
-
-// allCells.forEach((cell) => {
-//   cell.addEventListener('mouseover', ({target}) => {
-//     console.log(target);
-//     target.style.backgroundColor = "#000000";
-//   });
-// });
