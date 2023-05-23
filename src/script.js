@@ -27,7 +27,6 @@ const uiState = {
 const getNewGrayScaleColor = (rgbColor) => {
   let sep = rgbColor.indexOf(",") > -1 ? "," : " ";
   const [r, g, b] = rgbColor.substr(4).split(")")[0].split(sep);
-  console.log(r, g ,b)
   if ((+r - 25) <= 0 || (+g - 25) <= 0 || (+b - 25) <= 0) {
     return rgbColor;
   }
@@ -72,7 +71,7 @@ const startApp = () => {
     const allNewCells = document.querySelectorAll('.cell');
     uiState.rainbowMode = false;
     uiState.grayScaleMode = false;
-    allCells.forEach((cell) => {
+    allNewCells.forEach((cell) => {
       cell.style.backgroundColor = colors.white;
     });
   });
